@@ -1,43 +1,37 @@
-const express = require('express');
-const Employee = require('../models/Employee');
-const auth = require('../middleware/authMiddleware');
+const express = require("express");
 const router = express.Router();
+const Employee = require("../models/Employee");
+const authMiddleware = require("../middleware/auth");
 
-// Create
-router.post('/', auth, async (req, res) => {
-  try {
-    const employee = new Employee(req.body);
-    await employee.save();
-    res.json(employee);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+// ✅ CREATE
+router.post("/", authMiddleware, async (req, res) => {
+  const { name, position, salary } = req.body;
+  const employee = new Employee({ name, position, salary });
+  await employee.save();
+  res.status(201).json(employee);
 });
 
-// Read All
-router.get('/', auth, async (req, res) => {
+// ✅ READ ALL
+router.get("/", authMiddleware, async (req, res) => {
   const employees = await Employee.find();
   res.json(employees);
 });
 
-// Update
-router.put('/:id', auth, async (req, res) => {
-  try {
-    const updated = await Employee.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json(updated);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+// ✅ UPDATE
+router.put("/:id", authMiddleware, async (req, res) => {
+  const { name, position, salary } = req.body;
+  const updated = await Employee.findByIdAndUpdate(
+    req.params.id,
+    { name, position, salary },
+    { new: true }
+  );
+  res.json(updated);
 });
 
-// Delete
-router.delete('/:id', auth, async (req, res) => {
-  try {
-    await Employee.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Deleted successfully' });
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+// ✅ DELETE
+router.delete("/:id", authMiddleware, async (req, res) => {
+  await Employee.findByIdAndDelete(req.params.id);
+  res.json({ message: "Employee deleted" });
 });
 
 module.exports = router;
