@@ -1,19 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <title>Employee Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h2>Employee Dashboard</h2>
-  <div>
-    <input id="name" placeholder="Name" />
-    <input id="department" placeholder="Department" />
-    <input id="email" placeholder="Email" />
-    <input id="phone" placeholder="Phone" />
-    <button onclick="addEmployee()">Add</button>
-  </div>
-  <div id="employeeList"></div>
+
+  <form id="employeeForm">
+    <input type="hidden" id="employeeId" />
+    <input type="text" id="name" placeholder="Name" required />
+    <input type="text" id="position" placeholder="Position" required />
+    <input type="number" id="salary" placeholder="Salary" required />
+    <button type="submit">Save</button>
+  </form>
+
+  <table border="1" id="employeeTable">
+    <thead>
+      <tr><th>Name</th><th>Position</th><th>Salary</th><th>Actions</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <button onclick="logout()">Logout</button>
 
   <script src="script.js"></script>
 </body>

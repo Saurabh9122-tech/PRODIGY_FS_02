@@ -1,67 +1,75 @@
-let token = '';
+const token = localStorage.getItem("token");
+if (!token) window.location.href = "login.html";
 
-async function login() {
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
+// Create or Update Employee
+document.getElementById("employeeForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const id = document.getElementById("employeeId").value;
+  const name = document.getElementById("name").value;
+  const position = document.getElementById("position").value;
+  const salary = document.getElementById("salary").value;
 
-  const res = await fetch('http://localhost:5000/api/auth/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password })
-  });
+  const method = id ? "PUT" : "POST";
+  const url = id
+    ? `http://localhost:5000/api/employees/${id}`
+    : "http://localhost:5000/api/employees";
 
-  const data = await res.json();
-  if (data.token) {
-    localStorage.setItem('token', data.token);
-    window.location.href = 'dashboard.html';
-  } else {
-    alert(data.message);
-  }
-}
-
-async function addEmployee() {
-  const name = document.getElementById('name').value;
-  const department = document.getElementById('department').value;
-  const email = document.getElementById('email').value;
-  const phone = document.getElementById('phone').value;
-
-  const res = await fetch('http://localhost:5000/api/employees', {
-    method: 'POST',
+  const res = await fetch(url, {
+    method,
     headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ name, department, email, phone })
+    body: JSON.stringify({ name, position, salary }),
+  });
+
+  document.getElementById("employeeForm").reset();
+  fetchEmployees();
+});
+
+// Fetch All Employees
+async function fetchEmployees() {
+  const res = await fetch("http://localhost:5000/api/employees", {
+    headers: { Authorization: `Bearer ${token}` },
   });
 
   const data = await res.json();
-  alert('Employee added');
-  loadEmployees();
+  const tbody = document.querySelector("#employeeTable tbody");
+  tbody.innerHTML = "";
+
+  data.forEach((emp) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${emp.name}</td>
+      <td>${emp.position}</td>
+      <td>${emp.salary}</td>
+      <td>
+        <button onclick="editEmployee('${emp._id}', '${emp.name}', '${emp.position}', ${emp.salary})">Edit</button>
+        <button onclick="deleteEmployee('${emp._id}')">Delete</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
 }
 
-async function loadEmployees() {
-  const res = await fetch('http://localhost:5000/api/employees', {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-  });
-  const employees = await res.json();
-
-  const list = document.getElementById('employeeList');
-  list.innerHTML = employees.map(emp => `
-    <div>
-      ${emp.name} - ${emp.department} - ${emp.email} - ${emp.phone}
-      <button onclick="deleteEmployee('${emp._id}')">Delete</button>
-    </div>
-  `).join('');
+function editEmployee(id, name, position, salary) {
+  document.getElementById("employeeId").value = id;
+  document.getElementById("name").value = name;
+  document.getElementById("position").value = position;
+  document.getElementById("salary").value = salary;
 }
 
 async function deleteEmployee(id) {
   await fetch(`http://localhost:5000/api/employees/${id}`, {
-    method: 'DELETE',
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
   });
-  loadEmployees();
+  fetchEmployees();
 }
 
-if (window.location.pathname.includes('dashboard')) {
-  loadEmployees();
+function logout() {
+  localStorage.removeItem("token");
+  window.location.href = "login.html";
 }
+
+fetchEmployees();
