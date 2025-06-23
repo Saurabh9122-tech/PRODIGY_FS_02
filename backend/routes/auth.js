@@ -21,9 +21,11 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
+  console.log("Login attempt:", username, password);
 
   try {
     const user = await User.findOne({ username });
+
     if (!user || user.password !== password) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
@@ -34,8 +36,10 @@ router.post('/login', async (req, res) => {
 
     res.json({ token });
   } catch (err) {
+    console.error("Login error:", err.message); // ✅ Show exact error in terminal
     res.status(500).json({ message: 'Server error' });
   }
 });
+
 
 module.exports = router;
