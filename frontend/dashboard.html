@@ -10,7 +10,6 @@
   <div style="text-align: left; margin-bottom: 15px;">
   <button onclick="logout()" style="background-color: #4295f5;">Logout</button>
 </div>
-
   <div class="form-container">
     <form id="employeeForm">
       <input type="text" name="name" placeholder="Name" required>
@@ -20,7 +19,6 @@
       <button type="submit">Add Employee</button>
     </form>
   </div>
-
   <table id="employeeTable">
     <thead>
       <tr>
@@ -33,10 +31,8 @@
     </thead>
     <tbody></tbody>
   </table>
-
   <script>
     const token = localStorage.getItem("token");
-
     async function loadEmployees() {
       const res = await fetch("http://localhost:5000/api/employees", {
         headers: { Authorization: `Bearer ${token}` }
@@ -44,7 +40,6 @@
       const data = await res.json();
       const table = document.querySelector("#employeeTable tbody");
       table.innerHTML = "";
-
       data.forEach(emp => {
         const row = document.createElement("tr");
         row.innerHTML = `
@@ -60,7 +55,6 @@
         table.appendChild(row);
       });
     }
-
     document.getElementById("employeeForm").addEventListener("submit", async function (e) {
       e.preventDefault();
       const form = e.target;
@@ -70,7 +64,6 @@
         email: form.email.value,
         phone: form.phone.value
       };
-
       const res = await fetch("http://localhost:5000/api/employees", {
         method: "POST",
         headers: {
@@ -79,7 +72,6 @@
         },
         body: JSON.stringify(employee)
       });
-
       if (res.ok) {
         form.reset();
         loadEmployees();
@@ -87,7 +79,6 @@
         alert("Failed to add employee");
       }
     });
-
     async function updateEmployee(id, btn) {
       const row = btn.closest("tr");
       const inputs = row.querySelectorAll("input");
@@ -97,7 +88,6 @@
         email: inputs[2].value,
         phone: inputs[3].value
       };
-
       await fetch(`http://localhost:5000/api/employees/${id}`, {
         method: "PUT",
         headers: {
@@ -106,26 +96,19 @@
         },
         body: JSON.stringify(updated)
       });
-
       loadEmployees();
     }
-
     async function deleteEmployee(id) {
       if (!confirm("Delete this employee?")) return;
-
       await fetch(`http://localhost:5000/api/employees/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` }
       });
-
       loadEmployees();
     }
-
     window.onload = loadEmployees;
   </script>
   <script>
-  // ... existing script ...
-
   function logout() {
     localStorage.removeItem("token");
     window.location.href = "login.html";

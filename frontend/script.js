@@ -1,19 +1,15 @@
 const token = localStorage.getItem("token");
 if (!token) window.location.href = "login.html";
-
-// Create or Update Employee
 document.getElementById("employeeForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   const id = document.getElementById("employeeId").value;
   const name = document.getElementById("name").value;
   const position = document.getElementById("position").value;
   const salary = document.getElementById("salary").value;
-
   const method = id ? "PUT" : "POST";
   const url = id
     ? `http://localhost:5000/api/employees/${id}`
     : "http://localhost:5000/api/employees";
-
   const res = await fetch(url, {
     method,
     headers: {
@@ -22,21 +18,16 @@ document.getElementById("employeeForm").addEventListener("submit", async (e) => 
     },
     body: JSON.stringify({ name, position, salary }),
   });
-
   document.getElementById("employeeForm").reset();
   fetchEmployees();
 });
-
-// Fetch All Employees
 async function fetchEmployees() {
   const res = await fetch("http://localhost:5000/api/employees", {
     headers: { Authorization: `Bearer ${token}` },
   });
-
   const data = await res.json();
   const tbody = document.querySelector("#employeeTable tbody");
   tbody.innerHTML = "";
-
   data.forEach((emp) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
@@ -51,14 +42,12 @@ async function fetchEmployees() {
     tbody.appendChild(tr);
   });
 }
-
 function editEmployee(id, name, position, salary) {
   document.getElementById("employeeId").value = id;
   document.getElementById("name").value = name;
   document.getElementById("position").value = position;
   document.getElementById("salary").value = salary;
 }
-
 async function deleteEmployee(id) {
   await fetch(`http://localhost:5000/api/employees/${id}`, {
     method: "DELETE",
@@ -66,10 +55,8 @@ async function deleteEmployee(id) {
   });
   fetchEmployees();
 }
-
 function logout() {
   localStorage.removeItem("token");
   window.location.href = "login.html";
 }
-
 fetchEmployees();

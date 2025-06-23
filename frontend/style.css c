@@ -1,21 +1,15 @@
-/* style.css */
-
 html, body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: #e0f7ff; /* Full-page sky blue */
+  background-color:rgb(53, 211, 116);
 }
-
-/* Ensures body stretches to full page */
 body {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-/* Main white card container */
 .container {
   background: white;
   padding: 30px;
@@ -25,14 +19,11 @@ body {
   max-width: 420px;
   margin: 20px;
 }
-
 h1, h2 {
   text-align: center;
   color: #007acc;
   margin-bottom: 20px;
 }
-
-/* Input Fields */
 input {
   width: 100%;
   padding: 10px;
@@ -41,8 +32,6 @@ input {
   border-radius: 6px;
   font-size: 14px;
 }
-
-/* Primary Buttons */
 button {
   width: 100%;
   padding: 10px;
@@ -54,36 +43,26 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
 button:hover {
   background-color: #007acc;
 }
-
-/* Special styling for logout */
 .logout-btn {
-  background-color: #ff4d4d;
+  background-color:rgb(109, 152, 167);
   margin-bottom: 10px;
 }
-
 .logout-btn:hover {
-  background-color: #cc0000;
+  background-color:rgb(148, 174, 211);
 }
-
-/* Link text inside form */
 a {
   color: #007acc;
   text-decoration: none;
 }
-
 a:hover {
   text-decoration: underline;
 }
-
-/* Employee List Style */
 ul {
   padding-left: 20px;
 }
-
 li {
   margin: 5px 0;
 }
