@@ -1,29 +1,124 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dashboard</title>
+  <meta charset="UTF-8">
+  <title>Dashboard - Employee Manager</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>Employee Dashboard</h2>
+  <h1>Employee Dashboard</h1>
 
-  <form id="employeeForm">
-    <input type="hidden" id="employeeId" />
-    <input type="text" id="name" placeholder="Name" required />
-    <input type="text" id="position" placeholder="Position" required />
-    <input type="number" id="salary" placeholder="Salary" required />
-    <button type="submit">Save</button>
-  </form>
+  <div class="form-container">
+    <form id="employeeForm">
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="text" name="department" placeholder="Department" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="text" name="phone" placeholder="Phone" required>
+      <button type="submit">Add Employee</button>
+    </form>
+  </div>
 
-  <table border="1" id="employeeTable">
+  <table id="employeeTable">
     <thead>
-      <tr><th>Name</th><th>Position</th><th>Salary</th><th>Actions</th></tr>
+      <tr>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Actions</th>
+      </tr>
     </thead>
     <tbody></tbody>
   </table>
 
-  <button onclick="logout()">Logout</button>
+  <script>
+    const token = localStorage.getItem("token");
 
-  <script src="script.js"></script>
+    async function loadEmployees() {
+      const res = await fetch("http://localhost:5000/api/employees", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+      const table = document.querySelector("#employeeTable tbody");
+      table.innerHTML = "";
+
+      data.forEach(emp => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td><input type="text" value="${emp.name}" /></td>
+          <td><input type="text" value="${emp.department}" /></td>
+          <td><input type="text" value="${emp.email}" /></td>
+          <td><input type="text" value="${emp.phone}" /></td>
+          <td>
+            <button class="edit" onclick="updateEmployee('${emp._id}', this)">Update</button>
+            <button class="delete" onclick="deleteEmployee('${emp._id}')">Delete</button>
+          </td>
+        `;
+        table.appendChild(row);
+      });
+    }
+
+    document.getElementById("employeeForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const employee = {
+        name: form.name.value,
+        department: form.department.value,
+        email: form.email.value,
+        phone: form.phone.value
+      };
+
+      const res = await fetch("http://localhost:5000/api/employees", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(employee)
+      });
+
+      if (res.ok) {
+        form.reset();
+        loadEmployees();
+      } else {
+        alert("Failed to add employee");
+      }
+    });
+
+    async function updateEmployee(id, btn) {
+      const row = btn.closest("tr");
+      const inputs = row.querySelectorAll("input");
+      const updated = {
+        name: inputs[0].value,
+        department: inputs[1].value,
+        email: inputs[2].value,
+        phone: inputs[3].value
+      };
+
+      await fetch(`http://localhost:5000/api/employees/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(updated)
+      });
+
+      loadEmployees();
+    }
+
+    async function deleteEmployee(id) {
+      if (!confirm("Delete this employee?")) return;
+
+      await fetch(`http://localhost:5000/api/employees/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      loadEmployees();
+    }
+
+    window.onload = loadEmployees;
+  </script>
 </body>
 </html>
