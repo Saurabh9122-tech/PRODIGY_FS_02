@@ -1,56 +1,41 @@
-/* style.css */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Employee Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Login</h1>
+  <div class="form-container">
+    <form id="loginForm">
+      <input type="text" placeholder="Email" name="username" required>
+      <input type="password" placeholder="Password" name="password" required>
+      <button type="submit">Login</button>
+    </form>
+    <p style="text-align:center; margin-top: 10px;">No account? <a href="register.html">Register here</a></p>
+  </div>
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #e0f7ff; /* Sky blue background */
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-}
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const username = e.target.username.value;
+      const password = e.target.password.value;
 
-.container {
-  background: white;
-  margin-top: 50px;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
-}
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
 
-h2, h1 {
-  text-align: center;
-  color: #007acc;
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #00aaff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #007acc;
-}
-
-.logout-btn {
-  background-color: #ff4d4d;
-  margin-bottom: 10px;
-}
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem("token", data.token);
+        window.location.href = "dashboard.html";
+      } else {
+        alert(data.message);
+      }
+    });
+  </script>
+</body>
+</html>

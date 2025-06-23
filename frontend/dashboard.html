@@ -1,73 +1,124 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Dashboard - Employee Manager</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <button onclick="logout()" class="logout-btn">Logout</button>
-    <h1>Employee Dashboard</h1>
+  <h1>Employee Dashboard</h1>
 
-    <input type="text" id="name" placeholder="Name" />
-    <input type="text" id="department" placeholder="Department" />
-    <input type="email" id="email" placeholder="Email" />
-    <input type="text" id="phone" placeholder="Phone" />
-    <button onclick="addEmployee()">Add Employee</button>
-
-    <h3>Employees:</h3>
-    <ul id="employeeList"></ul>
+  <div class="form-container">
+    <form id="employeeForm">
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="text" name="department" placeholder="Department" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="text" name="phone" placeholder="Phone" required>
+      <button type="submit">Add Employee</button>
+    </form>
   </div>
 
+  <table id="employeeTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
   <script>
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
-    if (!token) window.location.href = 'login.html';
+    async function loadEmployees() {
+      const res = await fetch("http://localhost:5000/api/employees", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+      const table = document.querySelector("#employeeTable tbody");
+      table.innerHTML = "";
 
-    async function addEmployee() {
-      const name = document.getElementById('name').value;
-      const department = document.getElementById('department').value;
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
+      data.forEach(emp => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td><input type="text" value="${emp.name}" /></td>
+          <td><input type="text" value="${emp.department}" /></td>
+          <td><input type="text" value="${emp.email}" /></td>
+          <td><input type="text" value="${emp.phone}" /></td>
+          <td>
+            <button class="edit" onclick="updateEmployee('${emp._id}', this)">Update</button>
+            <button class="delete" onclick="deleteEmployee('${emp._id}')">Delete</button>
+          </td>
+        `;
+        table.appendChild(row);
+      });
+    }
 
-      const res = await fetch('/api/employees', {
-        method: 'POST',
+    document.getElementById("employeeForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const employee = {
+        name: form.name.value,
+        department: form.department.value,
+        email: form.email.value,
+        phone: form.phone.value
+      };
+
+      const res = await fetch("http://localhost:5000/api/employees", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({ name, department, email, phone })
+        body: JSON.stringify(employee)
       });
 
       if (res.ok) {
+        form.reset();
         loadEmployees();
       } else {
-        alert('Failed to add employee');
+        alert("Failed to add employee");
       }
+    });
+
+    async function updateEmployee(id, btn) {
+      const row = btn.closest("tr");
+      const inputs = row.querySelectorAll("input");
+      const updated = {
+        name: inputs[0].value,
+        department: inputs[1].value,
+        email: inputs[2].value,
+        phone: inputs[3].value
+      };
+
+      await fetch(`http://localhost:5000/api/employees/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(updated)
+      });
+
+      loadEmployees();
     }
 
-    async function loadEmployees() {
-      const res = await fetch('/api/employees', {
+    async function deleteEmployee(id) {
+      if (!confirm("Delete this employee?")) return;
+
+      await fetch(`http://localhost:5000/api/employees/${id}`, {
+        method: "DELETE",
         headers: { Authorization: `Bearer ${token}` }
       });
 
-      const employees = await res.json();
-      const list = document.getElementById('employeeList');
-      list.innerHTML = '';
-
-      employees.forEach(emp => {
-        const li = document.createElement('li');
-        li.textContent = `${emp.name} (${emp.department}) - ${emp.email}`;
-        list.appendChild(li);
-      });
+      loadEmployees();
     }
 
-    function logout() {
-      localStorage.removeItem('token');
-      window.location.href = 'login.html';
-    }
-
-    loadEmployees();
+    window.onload = loadEmployees;
   </script>
 </body>
 </html>

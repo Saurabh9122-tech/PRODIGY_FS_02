@@ -1,39 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Register</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Register - Employee Manager</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h2>Register</h2>
-    <input type="text" id="username" placeholder="Enter username" />
-    <input type="password" id="password" placeholder="Enter password" />
-    <button onclick="register()">Register</button>
-    <p style="text-align:center; margin-top:10px;">
-      Already registered? <a href="login.html">Login</a>
-    </p>
+  <h1>Register</h1>
+  <div class="form-container">
+    <form id="registerForm">
+      <input type="text" placeholder="Email" name="username" required>
+      <input type="password" placeholder="Password" name="password" required>
+      <button type="submit">Register</button>
+    </form>
+    <p style="text-align:center; margin-top: 10px;">Already registered? <a href="login.html">Login</a></p>
   </div>
 
   <script>
-    async function register() {
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
+    document.getElementById("registerForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const username = e.target.username.value;
+      const password = e.target.password.value;
 
-      const res = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
       });
 
       const data = await res.json();
       if (res.ok) {
-        alert('Registered successfully!');
-        window.location.href = 'login.html';
+        alert("Registered successfully!");
+        window.location.href = "login.html";
       } else {
-        alert(data.message || 'Registration failed');
+        alert(data.message);
       }
-    }
+    });
   </script>
 </body>
 </html>
