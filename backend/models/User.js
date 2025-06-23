@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs'); // ✅ Changed to bcryptjs
 
 const UserSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
@@ -19,5 +19,4 @@ UserSchema.methods.comparePassword = function (candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 };
 
-// ✅ Correctly export the model
 module.exports = mongoose.model('User', UserSchema);
