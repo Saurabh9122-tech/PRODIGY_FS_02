@@ -1,46 +1,55 @@
 /* style.css */
 
-body {
+html, body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #e0f7ff; /* Sky blue background */
   margin: 0;
   padding: 0;
+  height: 100%;
+  background-color: #e0f7ff; /* Full-page sky blue */
+}
+
+/* Ensures body stretches to full page */
+body {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
+  align-items: center;
 }
 
+/* Main white card container */
 .container {
   background: white;
-  margin-top: 50px;
   padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
+  margin: 20px;
 }
 
-h2, h1 {
+h1, h2 {
   text-align: center;
   color: #007acc;
+  margin-bottom: 20px;
 }
 
+/* Input Fields */
 input {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 6px;
+  font-size: 14px;
 }
 
+/* Primary Buttons */
 button {
   width: 100%;
   padding: 10px;
   background-color: #00aaff;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -50,7 +59,31 @@ button:hover {
   background-color: #007acc;
 }
 
+/* Special styling for logout */
 .logout-btn {
   background-color: #ff4d4d;
   margin-bottom: 10px;
+}
+
+.logout-btn:hover {
+  background-color: #cc0000;
+}
+
+/* Link text inside form */
+a {
+  color: #007acc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Employee List Style */
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin: 5px 0;
 }
