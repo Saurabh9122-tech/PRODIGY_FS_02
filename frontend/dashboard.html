@@ -7,6 +7,9 @@
 </head>
 <body>
   <h1>Employee Dashboard</h1>
+  <div style="text-align: right; margin-bottom: 15px;">
+  <button onclick="logout()" style="background-color: #ff4d4d;">Logout</button>
+</div>
 
   <div class="form-container">
     <form id="employeeForm">
@@ -120,5 +123,13 @@
 
     window.onload = loadEmployees;
   </script>
+  <script>
+  // ... existing script ...
+
+  function logout() {
+    localStorage.removeItem("token");
+    window.location.href = "login.html";
+  }
+</script>
 </body>
 </html>
