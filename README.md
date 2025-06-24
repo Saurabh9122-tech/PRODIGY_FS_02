@@ -27,55 +27,55 @@ This is a secure full-stack web application developed as part of **Prodigy InfoT
 
 # 📁 Project Structure
 
-PRODIGY_FS_02/
-├── backend/
-│ ├── models/
-│ ├── routes/
-│ ├── middleware/
-│ ├── server.js
-│ └── .env
-├── public/
-│ ├── login.html
-│ ├── register.html
-│ ├── dashboard.html
-│ └── style.css
-└── README.md
+PRODIGY_FS_02/ 
+├── backend/ 
+│ ├── models/ 
+│ ├── routes/ 
+│ ├── middleware/ 
+│ ├── server.js 
+│ └── .env 
+├── public/ 
+│ ├── login.html 
+│ ├── register.html 
+│ ├── dashboard.html 
+│ └── style.css 
+└── README.md 
 #📦 Installation & Running Locally
 ##Clone the repository
 
 bash
 Copy code
-git clone https://github.com/Saurabh9122-tech/PRODIGY_FS_02.git
-cd PRODIGY_FS_02/backend
+git clone https://github.com/Saurabh9122-tech/PRODIGY_FS_02.git 
+cd PRODIGY_FS_02/backend 
 ##Install backend dependencies
 
-bash
-Copy code
-npm install
+bash 
+Copy code 
+npm install 
 ##Start the server
 
-bash
-Copy code
-node server.js
+bash 
+Copy code 
+node server.js 
 ##Visit Frontend
-Open public/login.html in your browser.
+Open public/login.html in your browser. 
 
 #🔒 Authentication
-All employee operations are protected using a JWT token. After login, the token is stored and used to authorize all further actions like view, edit, or delete.
+All employee operations are protected using a JWT token. After login, the token is stored and used to authorize all further actions like view, edit, or delete. 
 
 #📸 Screenshots
-Add images of your login, dashboard, and CRUD operations here.
+Add images of your login, dashboard, and CRUD operations here. 
 
 #📃 License
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. 
 
 #✨ Acknowledgements
-Prodigy InfoTech
+Prodigy InfoTech 
 
-MongoDB Atlas
+MongoDB Atlas 
 
-JWT & bcrypt community
+JWT & bcrypt community 
 
 #👨‍💻 Developed By
-Saurabh Singh
-Intern @Prodigy InfoTech
+Saurabh Singh 
+Intern @Prodigy InfoTech 
