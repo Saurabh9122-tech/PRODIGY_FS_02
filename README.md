@@ -41,7 +41,8 @@ PRODIGY_FS_02/
 │ └── style.css  
 └── README.md 
 
-**#📦 Installation & Running Locally**    
+**#📦 Installation & Running Locally**
+
 **##Clone the repository**  
 
 bash  
