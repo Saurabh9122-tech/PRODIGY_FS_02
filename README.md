@@ -40,12 +40,13 @@ PRODIGY_FS_02/
 │ ├── dashboard.html   
 │ └── style.css  
 └── README.md 
+---
 
-**# 📦 Installation & Running Locally**
+# **📦 Installation & Running Locally**
 
 **## Clone the repository**  
 
-bash  
+'''bash  
 Copy code  
 git clone https://github.com/Saurabh9122-tech/PRODIGY_FS_02.git   
 cd PRODIGY_FS_02/backend  
