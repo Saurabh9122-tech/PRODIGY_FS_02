@@ -47,7 +47,7 @@ PRODIGY_FS_02/
 
 bash  
 Copy code  
-git clone https://github.com/Saurabh9122-tech/PRODIGY_FS_02.git   
+[git clone](https://github.com/Saurabh9122-tech/PRODIGY_FS_02.git)     
 cd PRODIGY_FS_02/backend  
 ## **Install backend dependencies**
 
@@ -69,7 +69,7 @@ All employee operations are protected using a JWT token. After login, the token 
 Add images of your login, dashboard, and CRUD operations here. 
 
 # **📃 License**
-This project is licensed under the MIT License. 
+This project is licensed under the [MIT License](https://github.com/Saurabh9122-tech/PRODIGY_FS_02?tab=MIT-1-ov-file).  
 
 # **✨ Acknowledgements**
 Prodigy InfoTech   
