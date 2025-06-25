@@ -41,15 +41,15 @@ PRODIGY_FS_02/
 │ └── style.css  
 └── README.md 
 
-**#📦 Installation & Running Locally**
+**# 📦 Installation & Running Locally**
 
-**##Clone the repository**  
+**## Clone the repository**  
 
 bash  
 Copy code  
 git clone https://github.com/Saurabh9122-tech/PRODIGY_FS_02.git   
 cd PRODIGY_FS_02/backend  
-**##Install backend dependencies**
+**## Install backend dependencies**
 
 bash   
 Copy code  
