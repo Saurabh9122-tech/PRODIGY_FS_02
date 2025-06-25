@@ -40,41 +40,42 @@ PRODIGY_FS_02/
 │ ├── dashboard.html   
 │ └── style.css  
 └── README.md 
-#📦 Installation & Running Locally  
-##Clone the repository
+
+**#📦 Installation & Running Locally**    
+**##Clone the repository**  
 
 bash  
 Copy code  
 git clone https://github.com/Saurabh9122-tech/PRODIGY_FS_02.git   
 cd PRODIGY_FS_02/backend  
-##Install backend dependencies
+**##Install backend dependencies**
 
 bash   
 Copy code  
 npm install  
-##Start the server
+**##Start the server**
 
 bash  
 Copy code   
 node server.js   
-##Visit Frontend
+**##Visit Frontend**
 Open public/login.html in your browser.   
 
-#🔒 Authentication
+**#🔒 Authentication**
 All employee operations are protected using a JWT token. After login, the token is stored and used to authorize all further actions like view, edit, or delete.  
 
-#📸 Screenshots
+**#📸 Screenshots**
 Add images of your login, dashboard, and CRUD operations here. 
 
-#📃 License
+**#📃 License**
 This project is licensed under the MIT License. 
 
-#✨ Acknowledgements
+**#✨ Acknowledgements**
 Prodigy InfoTech   
 MongoDB Atlas   
 
 JWT & bcrypt community  
 
-#👨‍💻 Developed By
-Saurabh Singh  
+**#👨‍💻 Developed By**
+**Saurabh Singh**  
 Intern @Prodigy InfoTech 
