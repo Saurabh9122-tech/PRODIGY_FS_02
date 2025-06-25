@@ -72,10 +72,10 @@ Add images of your login, dashboard, and CRUD operations here.
 This project is licensed under the [MIT License](https://github.com/Saurabh9122-tech/PRODIGY_FS_02?tab=MIT-1-ov-file).  
 
 # **✨ Acknowledgements**
-Prodigy InfoTech   
-MongoDB Atlas   
-
-JWT & bcrypt community  
+[Prodigy InfoTech](https://prodigyinfotech.dev/)   
+[MongoDB Atlas](https://www.mongodb.com/lp/cloud/atlas/try4-reg?utm_source=google&utm_campaign=search_gs_pl_evergreen_atlas_core-high-int_prosp-brand_gic-null_apac-in_ps-all_desktop_eng_lead&utm_term=mongodb%20atlas&utm_medium=cpc_paid_search&utm_ad=e&utm_ad_campaign_id=19617021259&adgroup=173739098353&cq_cmp=19617021259&gad_source=1&gad_campaignid=19617021259&gbraid=0AAAAADQ1402A8m4PZrg2zwZdgMl1WfoYq&gclid=CjwKCAjwvO7CBhAqEiwA9q2YJW1uvug-6ZVH_gWc7-dyWD6XOLgOrIzhRCwfILZHTziQYQU8UrkxvxoCxWIQAvD_BwE)  
+[GeeksforGeeks](https://www.geeksforgeeks.org/?utm_source=Google&utm_medium=Organic&utm_campaign=gmb_listing&utm_id=geeksforgeekspune) 
+**JWT & bcrypt community**  
 
 # **👨‍💻 Developed By**
 **Saurabh Singh**  
