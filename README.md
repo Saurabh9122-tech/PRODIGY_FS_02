@@ -70,7 +70,7 @@ All employee operations are protected using a JWT token. After login, the token 
 ## **2.Login Page**  ![Screenshot 2025-06-26 062046](https://github.com/user-attachments/assets/d03f86f8-343f-49f3-8d22-7304b4bdd354)  
  ## **3.Dashboard And CRUD Operations here**  ![Screenshot 2025-06-26 062614](https://github.com/user-attachments/assets/39675840-8a53-4ca0-898a-3a22eba2efc3)  
  
-# Demo Video on YouTube  
+# **📽️ 🎬Demo Video on YouTube**  
 [watch Now](https://youtu.be/gwjLwS487O0)  
 
 # **📃 License**
