@@ -66,7 +66,8 @@ Open public/login.html in your browser.
 All employee operations are protected using a JWT token. After login, the token is stored and used to authorize all further actions like view, edit, or delete.  
 
 # **📸 Screenshots**
-Add images of your login, dashboard, and CRUD operations here. 
+![Login Page](![Screenshot 2025-06-26 062026](https://github.com/user-attachments/assets/c5ab2265-f19f-417c-8376-e0a9ea1d7d91)
+, dashboard, and CRUD operations here. 
 
 # **📃 License**
 This project is licensed under the [MIT License](https://github.com/Saurabh9122-tech/PRODIGY_FS_02?tab=MIT-1-ov-file).  
