@@ -43,21 +43,12 @@ PRODIGY_FS_02/
 
 # **📦 Installation & Running Locally**
 
-## **Clone the repository**  
-
-bash  
-Copy code  
+## **Clone the repository**   
 [git clone](https://github.com/Saurabh9122-tech/PRODIGY_FS_02.git)     
 cd PRODIGY_FS_02/backend  
 ## **Install backend dependencies**
-
-bash   
-Copy code  
 npm install  
-## **Start the server**
-
-bash  
-Copy code   
+## **Start the server**  
 node server.js   
 ## **Visit Frontend**
 Open public/login.html in your browser.   
